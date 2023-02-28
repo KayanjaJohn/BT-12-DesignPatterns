@@ -15,7 +15,7 @@ var BasicAuthentication = /** @class */ (function () {
     BasicAuthentication.prototype.authenticate = function (credentials) {
         var username = credentials.username;
         var password = credentials.password;
-        console.log("User loggedin with username: " + username + " and password: " + password);
+        console.log("User loggedin with username: ".concat(username, " and password: ").concat(password));
     };
     return BasicAuthentication;
 }());
@@ -25,7 +25,7 @@ var EmailAuthentication = /** @class */ (function () {
     EmailAuthentication.prototype.authenticate = function (credentials) {
         var email = credentials.email;
         var password = credentials.password;
-        console.log("User loggedin with email: " + email + " and password: " + password);
+        console.log("User loggedin with email: ".concat(email, " and password: ").concat(password));
     };
     return EmailAuthentication;
 }());
@@ -35,9 +35,19 @@ var UserIdAuthentication = /** @class */ (function () {
     UserIdAuthentication.prototype.authenticate = function (credentials) {
         var id = credentials.id;
         var password = credentials.password;
-        console.log("User loggedin with id: " + id + " and password: " + password);
+        console.log("User loggedin with id: ".concat(id, " and password: ").concat(password));
     };
     return UserIdAuthentication;
+}());
+var UniqueNoAuthentication = /** @class */ (function () {
+    function UniqueNoAuthentication() {
+    }
+    UniqueNoAuthentication.prototype.authenticate = function (credentials) {
+        var uniqueNo = credentials.uniqueNo;
+        var password = credentials.password;
+        console.log("User loggedin with uniqueNo: ".concat(uniqueNo, " and password: ").concat(password));
+    };
+    return UniqueNoAuthentication;
 }());
 // The Context Class
 var Computer = /** @class */ (function () {
@@ -58,10 +68,12 @@ var Computer = /** @class */ (function () {
 // Client
 function client() {
     var computer = new Computer(new BasicAuthentication());
-    computer.authenticate({ username: 'richdad', password: 'coolrichie' });
+    computer.authenticate({ username: 'Jones', password: 'jons256' });
     computer.setAuthentication(new EmailAuthentication());
-    computer.authenticate({ email: 'richard@example.com', password: 'richiecool' });
+    computer.authenticate({ email: 'jons@gmail.com', password: '00jons09' });
     computer.setAuthentication(new UserIdAuthentication());
     computer.authenticate({ id: 'DF123VFG', password: '12345' });
+    computer.setAuthentication(new UniqueNoAuthentication());
+    computer.authenticate({ uniqueNo: 'A0010', password: '20000' });
 }
 client();

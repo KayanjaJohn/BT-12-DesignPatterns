@@ -64,6 +64,13 @@
         }
     }
 
+    class UniqueNoAuthentication implements Authentication{
+        authenticate(credentials){
+            let uniqueNo = credentials.uniqueNo;
+            let password = credentials.password;
+            console.log(`User loggedin with uniqueNo: ${uniqueNo} and password: ${password}`);
+        }
+    }
 
 // The Context Class
     class Computer{
@@ -90,11 +97,13 @@
 // Client
     function client(){
         let computer: Computer = new Computer(new BasicAuthentication());
-        computer.authenticate({username: 'richdad', password: 'coolrichie'});
+        computer.authenticate({username: 'Jones', password: 'jons256'});
         computer.setAuthentication(new EmailAuthentication())
-        computer.authenticate({email: 'richard@example.com', password: 'richiecool'});
+        computer.authenticate({email: 'jons@gmail.com', password: '00jons09'});
         computer.setAuthentication(new UserIdAuthentication())
         computer.authenticate({id: 'DF123VFG', password: '12345'});
+        computer.setAuthentication(new UniqueNoAuthentication())
+        computer.authenticate({uniqueNo: 'A0010', password: '20000'});
     }
     client();
 
